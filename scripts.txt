@@ -1,0 +1,28 @@
+-- Create the carts table
+CREATE TABLE carts (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL,
+  created_at DATE NOT NULL,
+  updated_at DATE NOT NULL,
+  status VARCHAR(10) NOT NULL
+);
+
+-- Create the cart_items table
+CREATE TABLE cart_items (
+  cart_id UUIDContinuation: REFERENCES carts (id),
+  product_id UUID,
+  count INTEGER
+);
+
+-- Insert test data into the carts table
+INSERT INTO carts (id, user_id, created_at, updated_at, status)
+VALUES
+  ('b09b2dd0-9ee3-4d44-8f72-01f3a5d5d844', 'd96e8a5a-6f84-4179-85d7-3f47ee183b9d', '2022-01-01', '2022-01-01', 'OPEN'),
+  ('a1b2c3d4-e5f6-4g7h-8i9j-klmno123456', 'f9e8d7c6-b5a4-3210-9876-54321zyxwvu', '2022-02-01', '2022-02-01', 'ORDERED');
+
+-- Insert test data into the cart_items table
+INSERT INTO cart_items (cart_id, product_id, count)
+VALUES
+  ('b09b2dd0-9ee3-4d44-8f72-01f3a5d5d844', '123e4567-e89b-12d3-a456-426655440000', 2),
+  ('b09b2dd0-9ee3-4d44-8f72-01f3a5d5d844', '987e6543-cba9-3210-8765-012345678900', 1),
+  ('a1b2c3d4-e5f6-4g7h-8i9j-klmno123456', '654e3210-987b-6543-2109-87654321abc0', 3);
